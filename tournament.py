@@ -28,6 +28,7 @@ def deletePlayers():
     conn.commit()
     conn.close()
 
+
 def countPlayers():
     """Returns the number of players currently registered."""
     conn = connect()
@@ -37,7 +38,7 @@ def countPlayers():
     result = c.fetchone()
     conn.close()
 
-    return result[0];
+    return result[0]
 
 
 def registerPlayer(name):
@@ -69,6 +70,14 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
+    conn = connect()
+    c = conn.cursor()
+    c.execute("SELECT * FROM TournamentStandings")
+    conn.commit()
+    results = c.fetchall()
+    conn.close()
+
+    return results
 
 
 def reportMatch(winner, loser):
@@ -78,6 +87,12 @@ def reportMatch(winner, loser):
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
     """
+    conn = connect()
+    c = conn.cursor()
+    c.execute("""INSERT INTO Match (PlayerIDWinner, PlayerIDLoser)
+        VALUES(%s, %s);""", (winner, loser))
+    conn.commit()
+    conn.close()
 
 
 def swissPairings():
@@ -95,5 +110,3 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-
-
