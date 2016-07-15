@@ -10,12 +10,6 @@
 DROP DATABASE tournament;
 CREATE DATABASE tournament;
 \c tournament;
-DROP TABLE IF EXISTS Match;
-DROP TABLE IF EXISTS Player;
-DROP VIEW IF EXISTS TournamentStandings;
-DROP VIEW IF EXISTS MatchesPlayed;
-DROP VIEW IF EXISTS MatchLosses;
-DROP VIEW IF EXISTS MatchWins;
 
 -- Players Table
 CREATE TABLE Player (
